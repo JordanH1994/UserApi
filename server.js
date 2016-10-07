@@ -5,7 +5,10 @@ const path = require('path')
 app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({extended: true}))
 
-databaseHandler.setup((err, res) => {
+let config = require('./.databaseConfig')
+let dbConnectionConfig = { host: config.db.host, user: config.db.username, password: config.db.password, database: config.db.database }
+
+databaseHandler.setup(dbConnectionConfig, (err, res) => {
   if (err) return console.log(err)
   app.listen(3000, () => {
     console.log('listening on port 3000')

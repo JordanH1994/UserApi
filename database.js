@@ -1,15 +1,12 @@
 let DBWrapper = require('node-dbi').DBWrapper
-let config = require('./.databaseConfig')
 let dbWrapper
 
 module.exports = {
-  setup: (callback) => {
+  setup: (connectionConfig,callback) => {
     // setup the database connection config
-    let dbConnectionConfig = { host: config.db.host, user: config.db.username, password: config.db.password, database: config.db.database }
-    dbWrapper = new DBWrapper('pg', dbConnectionConfig)
+    dbWrapper = new DBWrapper('pg', connectionConfig)
     // connect to the database
-    dbWrapper.connect()
-    callback(null, true)
+    dbWrapper.connect(callback)
   },
 
   getAllUsers: (callback) => {
