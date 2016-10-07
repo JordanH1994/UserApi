@@ -1,0 +1,29 @@
+{
+  "name": "User-api",
+  "version": "1.0.0",
+  "description": "A simple CRUD API supported by a postgres database",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "scripts/start.sh"
+  },
+  "repository": {
+  "type": "git",
+  "url": "git://github.com/JordanH1994/UsersApi.git"
+  },
+
+  "author": "Jordan Hood",
+  "license": "ISC",
+  "devDependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "fs": "0.0.1-security",
+    "moment": "^2.15.1",
+    "node-dbi": "^0.7.1",
+    "pg": "^6.1.0"
+  },
+  "dependencies": {
+    "ejs": "^2.5.2",
+    "file-system": "^2.2.1"
+  }
+}

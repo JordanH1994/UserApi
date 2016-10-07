@@ -1,0 +1,18 @@
+<table class="user_info">
+	<tr>
+		<th>id</th>
+		<th>email</th>
+		<th>forename</th>
+		<th>surename</th>
+	</tr>
+  <% for(var i=0; i<user_info.length; i++) {%>
+    <tr class="user">
+		<td><span><%= user_info[i].id %></span></td>
+		<td><span><%= user_info[i].email %></span></td>
+		<td><span><%= user_info[i].forename %></span></td>
+		<td><span><%= user_info[i].surename %></span></td>
+    </tr>
+  <% } %>
+</table>
+
+<form action='http://localhost:3000/'><input type="submit" value="Home"></form>
