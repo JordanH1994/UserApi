@@ -26,18 +26,6 @@ module.exports = {
       forename: {type: 'text'},
       surename: {type: 'text'},
       created_on: {type: 'text'},
-    }, {
-      methods :{
-        setSurename : function(surename){
-          this.surename = surename;
-        },
-        setForename: function(forename){
-          this.forename = forename;
-        },
-        setEmail: function(email){
-          this.email = email;
-        }
-      }
     });
 
     return callback(null, true);
