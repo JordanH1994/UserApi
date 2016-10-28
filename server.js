@@ -24,9 +24,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('/getAll', (req, res) => {
-  databaseHandler.getAllUsers((err, result) => {
+  return databaseHandler.getAllUsers((err, result) => {
     if (err) return console.log(err);
-    res.render('viewInfo.ejs', { user_info: result });
+    return res.render('viewInfo.ejs', { user_info: result });
   });
 });
 
@@ -39,7 +39,7 @@ app.get('/search', (req, res) => {
   };
   databaseHandler.search(params, (err, result) => {
     if (err) return console.log(err);
-    res.render('viewInfo.ejs', { user_info: result });
+    return res.render('viewInfo.ejs', { user_info: result });
   });
 });
 
@@ -49,9 +49,9 @@ app.post('/insert', (req, res) => {
     surename: req.body.last_name.toLowerCase(),
     email: req.body.email.toLowerCase()
   };
-  databaseHandler.insertUser(params, (err, result) => {
+  return databaseHandler.insertUser(params, (err, result) => {
     if (err) return console.log(err);
-    res.redirect('/');
+    return res.redirect('/');
   });
 });
 
@@ -66,7 +66,7 @@ app.post('/update', (req, res) => {
     surename: req.body.update_user_last_name.toLowerCase(),
     email: req.body.update_user_email.toLowerCase()
   };
-  databaseHandler.updateUser(paramsToUpdate, paramsToSearch, (err, result) => {
+  return databaseHandler.updateUser(paramsToUpdate, paramsToSearch, (err, result) => {
     if (err) return console.log(err);
     return res.redirect('/');
   });
