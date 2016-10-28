@@ -9,11 +9,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 let config = require('./.databaseConfig');
 let dbConnectionConfig = { host: config.db.host, user: config.db.username, password: config.db.password, database: config.db.database };
 
-databaseHandler.setup(dbConnectionConfig, (err, res) => {
+databaseHandler.setup(dbConnectionConfig, (err) => {
   if (err) return console.log(err);
-  app.listen(3000, () => {
+  return app.listen(3000, () => {
     console.log('listening on port 3000');
-    console.log('any information inserted into this program will be removed when the program stops');
+    return console.log('any information inserted into this program will be removed when the program stops');
+
   });
 });
 
@@ -49,7 +50,7 @@ app.post('/insert', (req, res) => {
     surename: req.body.last_name.toLowerCase(),
     email: req.body.email.toLowerCase()
   };
-  return databaseHandler.insertUser(params, (err, result) => {
+  return databaseHandler.insertUser(params, (err) => {
     if (err) return console.log(err);
     return res.redirect('/');
   });
@@ -66,7 +67,7 @@ app.post('/update', (req, res) => {
     surename: req.body.update_user_last_name.toLowerCase(),
     email: req.body.update_user_email.toLowerCase()
   };
-  return databaseHandler.updateUser(paramsToUpdate, paramsToSearch, (err, result) => {
+  return databaseHandler.updateUser(paramsToUpdate, paramsToSearch, (err) => {
     if (err) return console.log(err);
     return res.redirect('/');
   });
@@ -78,7 +79,7 @@ app.post('/delete', (req, res) => {
     forename: req.body.first_name.toLowerCase(),
     surename: req.body.last_name.toLowerCase()
   };
-  databaseHandler.deleteUser(params, (err, result) => {
+  databaseHandler.deleteUser(params, (err) => {
     if (err) return console.log(err);
     return res.redirect('/');
   });
