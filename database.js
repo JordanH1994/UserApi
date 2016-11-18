@@ -5,12 +5,13 @@ let Users;
 module.exports = {
   setup: (connectionConfig, callback) => {
     // setup the database connection
+    if (!connectionConfig) return callback('no connection params', null);
     let opts = {
       host: connectionConfig.host,
       database: connectionConfig.database,
       user: connectionConfig.user,
       password: connectionConfig.password,
-      protocol: 'postgres',
+      protocol: connectionConfig.protocol,
       query:
       {
         pool: true
@@ -26,7 +27,6 @@ module.exports = {
         surename: { type: 'text' },
         created_on: { type: 'text' }
       });
-
       return callback(null, true);
     });
   },
