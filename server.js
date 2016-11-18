@@ -7,7 +7,12 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 let config = require('./.databaseConfig');
-let dbConnectionConfig = { host: config.db.host, user: config.db.username, password: config.db.password, database: config.db.database };
+let dbConnectionConfig = {
+  host: config.db.host,
+  user: config.db.username,
+  password: config.db.password,
+  database: config.db.database
+};
 
 databaseHandler.setup(dbConnectionConfig, (err) => {
   if (err) return console.log(err);
@@ -21,7 +26,9 @@ databaseHandler.setup(dbConnectionConfig, (err) => {
 app.use(require('express').static('views'));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/views/index.html'));
+  if (res.statusCode === 200){
+    res.sendFile(path.join(__dirname, '/views/index.html'));
+  }
 });
 
 app.get('/getAll', (req, res) => {
@@ -33,10 +40,9 @@ app.get('/getAll', (req, res) => {
 
 // do a search by forename
 app.get('/search', (req, res) => {
-// having _ as a default value being passed into the sql to say  Any single character
   let params = {
-    forename: req.query.forename.toLowerCase() || '_',
-    surename: req.query.surename.toLowerCase() || '_'
+    forename: req.query.forename || '_',
+    surename: req.query.surename || '_'
   };
   databaseHandler.search(params, (err, result) => {
     if (err) return console.log(err);
@@ -46,11 +52,11 @@ app.get('/search', (req, res) => {
 
 app.post('/insert', (req, res) => {
   let params = {
-    forename: req.body.first_name.toLowerCase(),
-    surename: req.body.last_name.toLowerCase(),
-    email: req.body.email.toLowerCase()
+    forename: req.body.first_name,
+    surename: req.body.last_name,
+    email: req.body.email
   };
-  return databaseHandler.insertUser(params, (err) => {
+  return databaseHandler.insertUser(params, (err, res) => {
     if (err) return console.log(err);
     return res.redirect('/');
   });
@@ -59,13 +65,13 @@ app.post('/insert', (req, res) => {
 // had to do the update via post as put didn't want to work
 app.post('/update', (req, res) => {
   let paramsToSearch = {
-    forename: req.body.search_user_first_name.toLowerCase(),
-    surename: req.body.search_user_last_name.toLowerCase()
+    forename: req.body.search_user_first_name,
+    surename: req.body.search_user_last_name
   };
   let paramsToUpdate = {
-    forename: req.body.update_user_first_name.toLowerCase(),
-    surename: req.body.update_user_last_name.toLowerCase(),
-    email: req.body.update_user_email.toLowerCase()
+    forename: req.body.update_user_first_name,
+    surename: req.body.update_user_last_name,
+    email: req.body.update_user_email
   };
   return databaseHandler.updateUser(paramsToUpdate, paramsToSearch, (err) => {
     if (err) return console.log(err);
@@ -76,8 +82,8 @@ app.post('/update', (req, res) => {
 // had to do the delete via post as doing app.delete didn't want to work
 app.post('/delete', (req, res) => {
   let params = {
-    forename: req.body.first_name.toLowerCase(),
-    surename: req.body.last_name.toLowerCase()
+    forename: req.body.first_name,
+    surename: req.body.last_name
   };
   databaseHandler.deleteUser(params, (err) => {
     if (err) return console.log(err);
