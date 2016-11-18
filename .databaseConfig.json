@@ -3,6 +3,7 @@
 		"host":"localhost",
 		"username":"api",
 		"password":"api",
-		"database":"api"
+		"database":"api",
+    "protocol":"postgres"
 	}
 }
