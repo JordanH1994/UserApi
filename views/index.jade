@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title
+  table
+    thead
+      th id
+      th email
+      th surname
+      th forname
+      th created on
+    tbody
+    each user in users
+        tr
+          td=user.id
+          td=user.forname
+          td=user.surname
+          td=user.emial
+          td=user.createdOn
+          td
+            a(href='/users/'+user.id + '/' method='delete')  Delete user

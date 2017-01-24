@@ -1,34 +1,26 @@
 {
-  "name": "User-api",
+  "name": "UserApi",
   "version": "1.0.0",
-  "description": "A simple CRUD API supported by a postgres database",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "lint": "make-up database.js server.js",
+    "lint": "make-up models/ controllers/ config/ routes/ app.js",
     "test": "npm run lint && NODE_PATH=${PWD} mocha --timeout 10000",
     "start": "scripts/start.sh"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/JordanH1994/UsersApi.git"
-  },
-  "author": "Jordan Hood",
-  "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.15.2",
-    "ejs": "^2.5.2",
-    "express": "^4.14.0",
-    "mocha": "^3.1.0",
-    "node-dbi": "^0.7.1",
-    "orm": "^3.1.0",
-    "path": "^0.12.7",
-    "pg": "^6.1.0"
+    "body-parser": "~1.15.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "express": "~4.14.0",
+    "jade": "~1.11.0",
+    "morgan": "~1.7.0",
+    "pg": "^6.1.2",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.29.0",
+    "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "dirty-chai": "^1.2.2",
-    "make-up": "^9.3.1",
-    "sinon": "^1.17.6",
-    "sinon-chai": "^2.8.0"
+    "make-up": "^10.0.0",
+    "nodemon": "^1.11.0"
   }
 }
