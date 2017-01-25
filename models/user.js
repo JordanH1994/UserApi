@@ -10,19 +10,19 @@ module.exports = function(sequelize, DataTypes) {
       unique: 'users_pkey'
     },
     'email': {
-      type: DataTypes.string(255),
+      type: DataTypes.STRING,
       field: 'email'
     },
     'forname': {
-      type: DataTypes.string(30),
+      type: DataTypes.STRING,
       field: 'forname'
     },
     'surname': {
-      type: DataTypes.string(30),
+      type: DataTypes.STRING,
       field: 'surname'
     },
     'createdOn': {
-      type: DataTypes.string(255),
+      type: DataTypes.STRING,
       field: 'created_on'
     }
   }, {
