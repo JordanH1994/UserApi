@@ -1,4 +1,4 @@
-DROP TABlE IF EXISTS users;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE users(
 ID serial PRIMARY KEY,
