@@ -2,7 +2,7 @@
 var config = {
   development: {
     mode: 'development',
-    port: 3000,
+    port: 3500,
     database: {
       username: 'api',
       password: 'api',
