@@ -2,7 +2,6 @@
 var app = require('express')();
 var logger = require('morgan');
 var bodyParser = require('body-parser');
-var models = require('./models');
 var users = require('./routes/users');
 var config = require('./config/config')();
 
@@ -33,10 +32,9 @@ app.use(function(err, req, res) {
   res.render('error');
 });
 
-models.sequelize.sync().then(function() {
-  app.listen(config.port, function() {
-    console.log('Express server listening on port ' + config.port);
-  });
+app.listen(config.port, function() {
+  console.log('Any Data passed into this application will be lost on exit');
+  console.log('Express server listening on port ' + config.port);
 });
 
 
