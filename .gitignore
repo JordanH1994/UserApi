@@ -23,5 +23,5 @@ jspm_packages
 # Output of 'npm pack'
 *.tgz
 
-.eslintrc
 .eslintcache
+.DS_Store
