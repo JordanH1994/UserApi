@@ -35,5 +35,5 @@ var config = {
   }
 };
 module.exports = function(mode) {
-  return config[mode || process.argv[2] || 'development'] || config.development;
+  return config[mode || process.argv[2] ] || config.development;
 };

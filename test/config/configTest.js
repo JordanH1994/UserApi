@@ -1,11 +1,5 @@
 'use strict';
-// var sinon = require('sinon');
-var chai = require('chai');
-var expect = chai
-  .use(require('chai-as-promised'))
-  .use(require('dirty-chai'))
-  .use(require('sinon-chai'))
-  .expect;
+
 describe('Configuration setup', function() {
   it('should load local configurations', function(done) {
     var config = require('../../config/config')();
