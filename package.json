@@ -4,9 +4,11 @@
   "description": "Users API build with express and Sequalize",
   "private": true,
   "scripts": {
-    "lint": "eslint models/ controllers/ config/ routes/ app.js",
-    "test": "npm run lint && NODE_PATH=${PWD} mocha --timeout 10000",
-    "start": "scripts/start.sh"
+    "lint": "eslint models/ controllers/ config/ routes/ app.js test/",
+    "test": "npm run lint && npm run test:coverage",
+    "start": "scripts/start.sh",
+    "test:coverage": "NODE_PATH=${PWD} istanbul cover _mocha",
+    "test:watch": "NODE_PATH=${PWD} mocha --watch"
   },
   "dependencies": {
     "body-parser": "~1.15.2",
@@ -20,7 +22,15 @@
     "sequelize": "^3.29.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
+    "dirty-chai": "^1.2.2",
     "eslint": "^3.14.1",
-    "nodemon": "^1.11.0"
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
+    "sinon": "^1.17.7",
+    "sinon-as-promised": "^4.0.2",
+    "sinon-chai": "^2.8.0"
   }
 }
