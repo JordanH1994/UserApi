@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users(
-ID serial PRIMARY KEY,
+id serial PRIMARY KEY,
 email VARCHAR(255),
 forname VARCHAR(30),
 surname VARCHAR(30),
