@@ -5,7 +5,7 @@ var userModelStub;
 var Q = require('q');
 describe('User Controller', function() {
 
-  describe('#_get all', function() {
+  describe('# get all', function() {
     beforeEach(function() {
       userModelStub = sandbox.stub(userModel, 'findAll');
     });
@@ -45,7 +45,7 @@ describe('User Controller', function() {
     });
   });
 
-  describe('#_get one', function() {
+  describe('# get one', function() {
     beforeEach(function() {
       userModelStub = sandbox.stub(userModel, 'find');
     });
@@ -82,7 +82,7 @@ describe('User Controller', function() {
     });
   });
 
-  describe('#_update', function() {
+  describe('# update', function() {
     beforeEach(function() {
       userModelStub = sandbox.stub(userModel, 'update');
     });
@@ -156,7 +156,7 @@ describe('User Controller', function() {
     });
   });
 
-  describe('#_delete', function() {
+  describe('# delete', function() {
     beforeEach(function() {
       userModelStub = sandbox.stub(userModel, 'destroy');
     });
@@ -202,7 +202,7 @@ describe('User Controller', function() {
     });
   });
 
-  describe('#_create', function() {
+  describe('# create', function() {
     beforeEach(function() {
       userModelStub = sandbox.stub(userModel, 'create');
     });
