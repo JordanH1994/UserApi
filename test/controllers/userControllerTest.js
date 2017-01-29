@@ -220,18 +220,19 @@ describe('User Controller', function() {
     // });
 
     it('should return the new user if the create was successful', function() {
+      var date = new Date();
       var expectedData = {
         id: 1,
         forname: 'newtest',
         surname: 'newtest',
-        createdOn: new Date().toString(),
+        createdOn: date,
         email: 'testEmail'
       };
       var data = {
         forname: 'newtest',
         surname: 'newtest',
         email: 'testEmail',
-        createdOn: new Date().toString()
+        createdOn: date
       };
       userModelStub.returns(Q.resolve(expectedData));
       return userController.create(data)
