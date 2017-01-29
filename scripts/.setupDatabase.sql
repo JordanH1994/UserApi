@@ -5,7 +5,7 @@ id serial PRIMARY KEY,
 email VARCHAR(255),
 forname VARCHAR(30),
 surname VARCHAR(30),
-created_on VARCHAR(255)
+created_on TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 INSERT INTO users (email,forname,surname,created_on) VALUES ('enim.gravida@orciquislectus.edu','Desiree','Gibson','29/11/2016 20:13:30');
