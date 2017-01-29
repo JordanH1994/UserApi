@@ -96,7 +96,8 @@ describe('User Controller', function() {
       var data = {
         forname: 'newtest',
         surname: 'newtest',
-        createdOn: 'newtest'
+        createdOn: 'newtest',
+        email: 'test@test.com'
       };
 
       return userController.update(1, data)
@@ -115,12 +116,14 @@ describe('User Controller', function() {
         id: 1,
         forname: 'newtest',
         surname: 'newtest',
-        createdOn: 'newtest'
+        createdOn: 'newtest',
+        email: 'test@test.com'
       };
       var data = {
         forname: 'newtest',
         surname: 'newtest',
-        createdOn: 'newtest'
+        createdOn: 'newtest',
+        email: 'test@test.com'
       };
       userModelStub.returns(Q.resolve([expectedData]));
       return userController.update(1, data)
@@ -207,17 +210,24 @@ describe('User Controller', function() {
     afterEach(function() {
       sandbox.restore();
     });
-    // it('should return an empty object if no user was found to remove', function() {
-    //   userModelStub.returns(Q.resolve({}));
-    //   return userController.delete(1)
-    //   .then(function(result) {
-    //     expect(userModelStub).to.have.been.calledOnce();
-    //     expect(userModelStub).to.have.been.calledWith({ where: {
-    //       id: 1
-    //     } });
-    //     expect(result).to.deep.equal({});
-    //   });
-    // });
+
+    it('should return an error if an incorrect emial was passed in', function() {
+      userModelStub.returns(Q.reject('Error: Validation error: Must be a valid email address'));
+
+      var data = {
+        forname: 'newtest',
+        surname: 'newtest',
+        createdOn: 'newtest',
+        email: 'testtest.com'
+      };
+
+      return userController.create(data)
+      .fail(function(result) {
+        expect(userModelStub).to.have.been.calledOnce();
+        expect(userModelStub).to.have.been.calledWith(data);
+        expect(result).to.deep.equal('Error: Validation error: Must be a valid email address');
+      });
+    });
 
     it('should return the new user if the create was successful', function() {
       var date = new Date();
