@@ -33,7 +33,7 @@ UsersController.get = function(id) {
     return deferred.resolve(user);
   })
   .catch(function(error) {
-    return deferred.reject('error retrieving user.' + error);
+    return deferred.reject(new Error('error retrieving user.' + error));
   });
   return deferred.promise;
 };
