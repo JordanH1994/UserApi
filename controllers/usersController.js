@@ -4,7 +4,6 @@ var models = require('../models/');
 var UsersController = {};
 var { isEmpty } = require('lodash');
 
-
 UsersController.getAll = function() {
   var deferred = Q.defer();
   models.user.findAll({
@@ -71,14 +70,7 @@ UsersController.delete = function(id) {
 
 UsersController.create = function(data) {
   var deferred = Q.defer();
-  var userDetails = {
-    email: data.email,
-    forname: data.forname,
-    surname: data.surname,
-    createdOn: new Date().toString()
-  };
-
-  models.user.create(userDetails)
+  models.user.create(data)
   .then(function(user) {
     return deferred.resolve(user);
   })
