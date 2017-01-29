@@ -100,7 +100,8 @@ router.delete('/:id', User.destroy);
  *     produces: application/json
  *     parameters:
  *     - name: user
- *       in: body
+ *       in: path
+ *       required: true
  *       description: New data for the User
  *       schema:
  *         $ref: '#/definitions/UserPutAndPost'
