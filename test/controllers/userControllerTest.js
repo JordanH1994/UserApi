@@ -101,7 +101,7 @@ describe('User Controller', () => {
       };
 
       return userController.update(1, data)
-      .then((result)  => {
+      .then((result) => {
         expect(userModelStub).to.have.been.calledOnce();
         expect(userModelStub).to.have.been.calledWith(data, { where: {
           id: 1
