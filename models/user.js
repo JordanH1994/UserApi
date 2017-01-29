@@ -11,18 +11,37 @@ module.exports = function(sequelize, DataTypes) {
     },
     'email': {
       type: DataTypes.STRING,
-      field: 'email'
+      field: 'email',
+      validate: {
+        isEmail: {
+          msg: 'Must be a valid email address'
+        }
+      }
     },
     'forname': {
       type: DataTypes.STRING,
-      field: 'forname'
+      field: 'forname',
+      validate: {
+        notEmpty: true,
+        is: {
+          args: ['^[a-z]+$', 'i'],
+          msg: 'Must be a string without numbers'
+        }
+      }
     },
     'surname': {
       type: DataTypes.STRING,
-      field: 'surname'
+      field: 'surname',
+      validate: {
+        notEmpty: true,
+        is: {
+          args: ['^[a-z]+$', 'i'],
+          msg: 'Must be a string without numbers'
+        }
+      }
     },
     'createdOn': {
-      type: DataTypes.STRING,
+      type: DataTypes.DATE,
       field: 'created_on'
     }
   }, {
