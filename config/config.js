@@ -34,6 +34,6 @@ var config = {
     }
   }
 };
-module.exports = function(mode) {
+module.exports = (mode) => {
   return config[mode || process.argv[2] ] || config.development;
 };

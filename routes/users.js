@@ -1,7 +1,7 @@
 'use strict';
-var express = require('express');
-var router = new express.Router();
-var User = require('./users/index.js');
+const express = require('express');
+const router = new express.Router();
+const User = require('./users/index.js');
 
 
 router.get('/', User.getAll);

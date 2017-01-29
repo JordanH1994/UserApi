@@ -1,80 +1,80 @@
 'use strict';
-var Q = require('q');
-var models = require('../models/');
-var UsersController = {};
-var { isEmpty } = require('lodash');
+const Q = require('q');
+const models = require('../models/');
+const UsersController = {};
+const { isEmpty } = require('lodash');
 
-UsersController.getAll = function() {
-  var deferred = Q.defer();
+UsersController.getAll = () => {
+  const deferred = Q.defer();
   models.user.findAll({
     raw: true
   })
-  .then(function(users) {
+  .then((users) => {
     if (isEmpty(users)) {
       return deferred.reject( new Error('Could not find any users'));
     }
     return deferred.resolve(users);
   })
-  .catch(function(error) {
+  .catch((error) => {
     return deferred.reject(new Error('Error retrieving users.' + error));
   });
   return deferred.promise;
 };
 
-UsersController.get = function(id) {
-  var deferred = Q.defer();
+UsersController.get = (id) => {
+  const deferred = Q.defer();
   models.user.find({
     raw: true,
     where: {
       id: id
     }
-  }).then(function(user) {
+  }).then((user) => {
     return deferred.resolve(user);
   })
-  .catch(function(error) {
+  .catch((error) => {
     return deferred.reject(new Error('error retrieving user.' + error));
   });
   return deferred.promise;
 };
 
-UsersController.update = function(id, data) {
-  var deferred = Q.defer();
+UsersController.update = (id, data) => {
+  const deferred = Q.defer();
   models.user.update(data, {
     where: {
       id: id
     },
     returning: true
-  }).then(function(result) {
+  }).then((result) => {
     return deferred.resolve(result);
   })
-  .catch(function(err) {
+  .catch((err) => {
     return deferred.reject(err);
   });
   return deferred.promise;
 };
 
-UsersController.delete = function(id) {
-  var deferred = Q.defer();
+UsersController.delete = (id) => {
+  const deferred = Q.defer();
   models.user.destroy({
     where: {
       id: id
     }
-  }).then(function(result) {
+  }).then((result) => {
     return deferred.resolve(result);
   })
-  .catch(function(err) {
+  .catch((err) => {
     return deferred.reject(err);
   });
   return deferred.promise;
 };
 
-UsersController.create = function(data) {
-  var deferred = Q.defer();
+UsersController.create = (data) => {
+  const deferred = Q.defer();
   models.user.create(data)
-  .then(function(user) {
+  .then((user) => {
     return deferred.resolve(user);
   })
-  .catch(function(err) {
+  .catch((err) => {
     deferred.reject(err);
   });
   return deferred.promise;
