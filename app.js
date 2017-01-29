@@ -4,11 +4,36 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const users = require('./routes/users');
 const config = require('./config/config')();
+const swaggerJSDoc = require('swagger-jsdoc');
 
-// view engine setup
+const swaggerDefinition = {
+  info: {
+    title: 'Node Users API',
+    version: '1.0.0',
+    description: 'CURD API using sequalize and express'
+  },
+  host: 'localhost:3500',
+  basePath: '/'
+};
 
+// options for the swagger docs
+const options = {
+  // import swaggerDefinitions
+  swaggerDefinition: swaggerDefinition,
+  // path to the API docs
+  apis: ['./routes/*.js']
+};
+
+// initialize swagger-jsdoc
+const swaggerSpec = swaggerJSDoc(options);
+
+app.get('/swagger.json', function(req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
+});
+
+app.use(require('express').static('./public'));
 app.use(logger('dev'));
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -37,5 +62,5 @@ app.listen(config.port, () => {
   console.log('Express server listening on port ' + config.port);
 });
 
-
+// swagger definition
 module.exports = app;

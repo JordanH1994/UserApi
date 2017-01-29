@@ -19,7 +19,8 @@
     "pg": "^6.1.2",
     "pg-hstore": "^2.3.2",
     "q": "^1.4.1",
-    "sequelize": "^3.29.0"
+    "sequelize": "^3.29.0",
+    "swagger-jsdoc": "^1.9.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
