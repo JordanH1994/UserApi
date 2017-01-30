@@ -6,10 +6,10 @@ An API to manage a user persistence layer
 * The API exposes a user model with the following properties: id, email, forename, surname, date created
 * The following endpoints are exposed: create, read, update, delete
 * Can be consumed using Google Chrome's Postman. See repo for User_API.postman_collection file, which can be imported by Postman
-* Input is validated and sanitised with sequalize's build in vailidation
+* Input is validated and sanitised with sequalize's build in validation
 
 ## Installation
-1. Insall node version `v6.7.0`
+1. Install node version `v6.7.0`
 2. App dependencies - `npm install`
 3. [PostGres](https://www.postgresql.org/) - to allow user data to be persisted the app requires a connection to an instance of PostGres SQL. The local connection string is specified in the config.js file.
 
