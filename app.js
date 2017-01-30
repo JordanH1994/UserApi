@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const users = require('./routes/users');
 const config = require('./config/config')();
 const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
 const swaggerDefinition = {
   info: {
@@ -31,6 +32,9 @@ app.get('/swagger.json', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.send(swaggerSpec);
 });
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 app.use(require('express').static('./public'));
 app.use(logger('dev'));
