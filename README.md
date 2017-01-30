@@ -1,34 +1,22 @@
-## UserApi
-A CRUD api backed by a postgres database
+# Node.js User API
+An API to manage a user persistence layer
 
-## Getting started
+## Implementation
 
-You will need [PostGres](https://www.postgresql.org/) installed
+* The API exposes a user model with the following properties: id, email, forename, surname, date created
+* The following endpoints are exposed: create, read, update, delete
+* Can be consumed using Google Chrome's Postman. See repo for User_API.postman_collection file, which can be imported by Postman
+* Input is validated and sanitised with sequalize's build in vailidation
 
-```
-brew install postgres
-```
+## Installation
+1. Insall node version `v6.7.0`
+2. App dependencies - `npm install`
+3. [PostGres](https://www.postgresql.org/) - to allow user data to be persisted the app requires a connection to an instance of PostGres SQL. The local connection string is specified in the config.js file.
 
-## Install
+## Usage
+To get the Node.js server running you should only need to:
 
-```
-nvm install 6.7.0
-nvm use 
-npm install
-```
+On the first time starting the scripts will create an user and a database to use for storing, reading, writing, and deleting 'user' information
+1. To start the Node.js server run `npm start`
 
-## Running
-One the first time starting the scripts will create an user and a database to use for storing, reading, writing, and deleting 'user' information
-
-```
-npm start
-```
-
-#Via Web Browser
-
-Start off by going to
-
-```
-localhost:3000
-```
-to which you should be greated by a simple UI to be able to interact with the API
+Unit tests can run using `npm test`.
