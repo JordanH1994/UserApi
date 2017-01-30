@@ -44,6 +44,8 @@ const User = require('./users/index.js');
  *         description: An array of users
  *         schema:
  *           $ref: '#/definitions/User'
+ *       500:
+ *          description: Error no users found
  */
 router.get('/', User.getAll);
 
@@ -67,6 +69,8 @@ router.get('/', User.getAll);
  *         description: A single User
  *         schema:
  *           $ref: '#/definitions/User'
+ *       500:
+ *          description: Error no users found matching that id
  */
 router.get('/read/:id', User.getOne);
 
@@ -95,19 +99,26 @@ router.delete('/:id', User.destroy);
  * @swagger
  * /users/{id}:
  *   put:
- *     tags: Users
+ *     tags:
+ *       - Users
  *     description: Updates a single user
- *     produces: application/json
+ *     produces:
+ *       - application/json
  *     parameters:
- *     - name: user
- *       in: path
- *       required: true
- *       description: New data for the User
- *       schema:
- *         $ref: '#/definitions/UserPutAndPost'
+ *       - name: id
+ *         description: Users's id
+ *         in: path
+ *         required: true
+ *         type: integer
+ *       - name: user
+ *         description: User object
+ *         in: body
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/UserPutAndPost'
  *     responses:
  *       200:
- *         description: Successfully updated
+ *         description: Successfully Updated
  */
 router.put('/:id', User.update);
 
