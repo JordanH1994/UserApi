@@ -20,3 +20,6 @@ On the first time starting the scripts will create an user and a database to use
 1. To start the Node.js server run `npm start`
 
 Unit tests can run using `npm test`.
+
+## Documentation
+Once the server is running, the api is documented using swagger and swagger ui, which can be accessed by going to `http://localhost:3500/api-docs
