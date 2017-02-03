@@ -7,4 +7,9 @@ psql -tAc "SELECT 1 FROM pg_database WHERE datname='api'" | grep -q 1 || psql -c
 #dump the sql file into the database 
 psql -q -U api -d api -1 -f ./scripts/.setupDatabase.sql &&
 
-nodemon app.js development
+S1=$1
+if [ -z "$S1" ];
+then
+				S1='developent'
+fi
+nodemon app.js $S1
