@@ -4,6 +4,7 @@
   "description": "Users API build with express and Sequalize",
   "private": true,
   "scripts": {
+    "ci": "istanbul cover _mocha --recursive -R xunit > $CIRCLE_TEST_REPORTS/unit/results.xml",
     "lint": "standard",
     "test": "npm run lint && npm run test:coverage",
     "start": "scripts/start.sh",

@@ -2,8 +2,11 @@ machine:
   node:
     version: 6.7.0
 test:
+  pre:
+    - mkdir -p $CIRCLE_TEST_REPORTS/unit
+    - mkdir -p $CIRCLE_TEST_REPORTS/coverage
   override:
     - npm run lint
-    - npm run test
+    - npm run ci
   post:
     - NODE_ENV=test istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
