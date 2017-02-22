@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 var config = {
   development: {
     mode: 'development',
@@ -33,7 +33,7 @@ var config = {
       dialect: 'postgres'
     }
   }
-};
+}
 module.exports = (mode) => {
-  return config[mode || process.argv[2] ] || config.development;
-};
+  return config[ mode || process.argv[ 2 ] ] || config.development
+}

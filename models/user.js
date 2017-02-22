@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define('user', {
     'id': {
@@ -48,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'users',
     schema: 'public',
     timestamps: false
-  });
+  })
 
-  return User;
-};
+  return User
+}
