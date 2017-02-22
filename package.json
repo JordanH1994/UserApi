@@ -4,12 +4,13 @@
   "description": "Users API build with express and Sequalize",
   "private": true,
   "scripts": {
-    "ci": "istanbul cover _mocha -- --recursive -R xunit > $CIRCLE_TEST_REPORTS/unit/results.xml",
+    "ci": "istanbul cover _mocha -- -R xunit > $CIRCLE_TEST_REPORTS/unit/results.xml",
     "lint": "standard",
     "test": "npm run lint && npm run test:coverage",
     "start": "scripts/start.sh",
     "test:coverage": "NODE_PATH=${PWD} istanbul cover _mocha",
-    "test:watch": "NODE_PATH=${PWD} mocha --watch"
+    "test:watch": "NODE_PATH=${PWD} mocha --watch",
+    "posttest": "istanbul check-coverage"
   },
   "dependencies": {
     "body-parser": "~1.15.2",
@@ -29,7 +30,7 @@
     "chai-as-promised": "^6.0.0",
     "coveralls": "^2.11.16",
     "dirty-chai": "^1.2.2",
-    "istanbul": "^0.4.5",
+    "istanbul": "^1.0.0-alpha.2",
     "mocha": "^3.2.0",
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.11.0",
@@ -39,8 +40,8 @@
     "standard": "^8.6.0"
   },
   "standard": {
-    "globals": [ 
-      "expect", 
+    "globals": [
+      "expect",
       "it",
       "beforeEach",
       "afterEach",
