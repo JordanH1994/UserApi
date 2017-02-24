@@ -1,7 +1,7 @@
 'use strict'
 module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define('user', {
-    'id': {
+    id: {
       type: DataTypes.INTEGER,
       field: 'id',
       primaryKey: true,
@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: 'users_pkey'
     },
-    'email': {
+    email: {
       type: DataTypes.STRING,
       field: 'email',
       validate: {
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    'forname': {
+    forname: {
       type: DataTypes.STRING,
       field: 'forname',
       validate: {
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    'surname': {
+    surname: {
       type: DataTypes.STRING,
       field: 'surname',
       validate: {
@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    'createdOn': {
+    createdOn: {
       type: DataTypes.DATE,
       field: 'created_on'
     }

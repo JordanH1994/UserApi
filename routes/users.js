@@ -117,7 +117,7 @@ router.delete('/:id', User.delete)
  *         schema:
  *           $ref: '#/definitions/UserPutAndPost'
  *     responses:
- *       200:
+ *       204:
  *         description: Successfully Updated
  */
 router.put('/:id', User.update)

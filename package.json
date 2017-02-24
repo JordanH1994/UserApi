@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "body-parser": "~1.15.2",
-    "debug": "~2.2.0",
     "express": "~4.14.0",
     "express-test-util": "^1.1.5",
     "lodash": "^4.17.4",
@@ -36,7 +35,6 @@
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.11.0",
     "sinon": "^1.17.7",
-    "sinon-as-promised": "^4.0.2",
     "sinon-chai": "^2.8.0",
     "standard": "^8.6.0"
   },
