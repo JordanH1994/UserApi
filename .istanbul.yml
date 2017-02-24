@@ -5,7 +5,7 @@ instrumentation:
     - app.js
 check:
   global:
-    Statements: 61
-    Branches: 71
-    Functions: 55
-    Lines: 61
+    Statements: 83
+    Branches: 100
+    Functions: 100
+    Lines: 82

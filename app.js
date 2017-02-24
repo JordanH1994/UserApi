@@ -1,5 +1,5 @@
 'use strict'
-let app = require('express')()
+const app = require('express')()
 const logger = require('morgan')
 const bodyParser = require('body-parser')
 const users = require('./routes/users')
@@ -11,36 +11,32 @@ const swaggerDefinition = {
   info: {
     title: 'Node Users API',
     version: '1.0.0',
-    description: 'CURD API using sequalize and express'
+    description: 'CRUD API using sequalize and express'
   },
   host: 'localhost:3500',
   basePath: '/'
 }
-
-// options for the swagger docs
 const options = {
   // import swaggerDefinitions
   swaggerDefinition: swaggerDefinition,
   // path to the API docs
   apis: ['./routes/*.js']
 }
-
 // initialize swagger-jsdoc
 const swaggerSpec = swaggerJSDoc(options)
 
+app.use(logger('dev'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+app.use('/users', users)
+// expose swagger.json
 app.get('/swagger.json', (req, res) => {
   res.setHeader('Content-Type', 'application/json')
   res.send(swaggerSpec)
 })
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
-
-app.use(require('express').static('./public'))
-app.use(logger('dev'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-
-app.use('/users', users)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -53,7 +49,7 @@ app.use((req, res, next) => {
 app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message
-  res.locals.error = req.app.get('env') === 'development' ? err : {}
+  res.locals.error = process.env.NODE_ENV === 'development' ? err : {}
 
   // render the error page
   res.status(err.status || 500)

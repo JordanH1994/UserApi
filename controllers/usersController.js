@@ -1,82 +1,61 @@
 'use strict'
-const Q = require('q')
-const models = require('../models/')
+const {user} = require('../models/')
 const UsersController = {}
-const { isEmpty } = require('lodash')
 
-UsersController.getAll = () => {
-  const deferred = Q.defer()
-  models.user.findAll({
+UsersController.getAll = (req, res) => {
+  return user.findAll({
     raw: true
   })
   .then((users) => {
-    if (isEmpty(users)) {
-      return deferred.reject(new Error('Could not find any users'))
-    }
-    return deferred.resolve(users)
+    return res.send(users)
   })
-  .catch((error) => {
-    return deferred.reject(new Error('Error retrieving users.' + error))
-  })
-  return deferred.promise
 }
 
-UsersController.get = (id) => {
-  const deferred = Q.defer()
-  models.user.find({
+UsersController.get = (req, res) => {
+  const id = req.params.id
+  return user.find({
     raw: true,
     where: {
       id: id
     }
-  }).then((user) => {
-    return deferred.resolve(user)
   })
-  .catch((error) => {
-    return deferred.reject(new Error('error retrieving user.' + error))
+  .then((user) => {
+    return res.send(user)
   })
-  return deferred.promise
 }
 
-UsersController.update = (id, data) => {
-  const deferred = Q.defer()
-  models.user.update(data, {
+UsersController.update = (req, res) => {
+  const id = req.params.id
+  const data = req.body
+  return user.update(data, {
     where: {
       id: id
     },
     returning: true
-  }).then((result) => {
-    return deferred.resolve(result)
   })
-  .catch((err) => {
-    return deferred.reject(err)
+  .then((user) => {
+    return res.send(user)
   })
-  return deferred.promise
 }
 
-UsersController.delete = (id) => {
-  const deferred = Q.defer()
-  models.user.destroy({
+UsersController.delete = (req, res) => {
+  const id = req.params.id
+  return user.destroy({
     where: {
       id: id
     }
-  }).then((result) => {
-    return deferred.resolve(result)
   })
-  .catch((err) => {
-    return deferred.reject(err)
+  .then((result) => {
+    if (result === 1) return res.send(204)
+    return res.send(new Error('Cannot Delete User with id: ' + req.params.id))
   })
-  return deferred.promise
 }
 
-UsersController.create = (data) => {
-  const deferred = Q.defer()
-  models.user.create(data)
+UsersController.create = (req, res) => {
+  return user.create(req.body)
   .then((user) => {
-    return deferred.resolve(user)
+    res.send(user, 201)
   })
-  .catch((err) => {
-    deferred.reject(err)
-  })
-  return deferred.promise
 }
+
 module.exports = UsersController

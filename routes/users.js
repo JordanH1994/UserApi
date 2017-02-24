@@ -1,7 +1,7 @@
 'use strict'
 const express = require('express')
 const router = new express.Router()
-const User = require('./users/index.js')
+const User = require('../controllers/usersController')
 /**
  * @swagger
  * definition:
@@ -34,7 +34,7 @@ const User = require('./users/index.js')
 
 /**
  * @swagger
- * /users:
+ * /users/read/:
  *   get:
  *     tags:
  *       - Users
@@ -47,7 +47,7 @@ const User = require('./users/index.js')
  *       500:
  *          description: Error no users found
  */
-router.get('/', User.getAll)
+router.get('/read/', User.getAll)
 
 /**
  * @swagger
@@ -72,7 +72,7 @@ router.get('/', User.getAll)
  *       500:
  *          description: Error no users found matching that id
  */
-router.get('/read/:id', User.getOne)
+router.get('/read/:id', User.get)
 
 /**
  * @swagger
@@ -93,7 +93,7 @@ router.get('/read/:id', User.getOne)
  *       200:
  *         description: Successfully deleted
  */
-router.delete('/:id', User.destroy)
+router.delete('/:id', User.delete)
 
 /**
  * @swagger

@@ -32,7 +32,7 @@
 		{
 			"name": "GET ALL",
 			"request": {
-				"url": "localhost:3500/users",
+				"url": "localhost:3500/users/read/",
 				"method": "GET",
 				"header": [],
 				"body": {},

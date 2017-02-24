@@ -16,6 +16,7 @@
     "body-parser": "~1.15.2",
     "debug": "~2.2.0",
     "express": "~4.14.0",
+    "express-test-util": "^1.1.5",
     "lodash": "^4.17.4",
     "morgan": "~1.7.0",
     "pg": "^6.1.2",
