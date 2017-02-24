@@ -2,7 +2,7 @@
 
 describe('Configuration setup', () => {
   it('should load local configurations', (done) => {
-    var config = require('../../config/config')()
+    var config = require('../../config/config')('development')
     expect(config.mode).to.equal('development')
     expect(config).to.have.deep.property('database')
     done()
@@ -14,7 +14,7 @@ describe('Configuration setup', () => {
     done()
   })
   it('should load production configurations', (done) => {
-    var config = require('../../config/config')('production')
+    var config = require('../../config/config')()
     expect(config.mode).to.equal('production')
     expect(config).to.have.deep.property('database')
     done()

@@ -35,5 +35,5 @@ var config = {
   }
 }
 module.exports = (mode) => {
-  return config[ mode || process.argv[ 2 ] ] || config.development
+  return config[ mode || process.env.NODE_ENV ] || config.production
 }
