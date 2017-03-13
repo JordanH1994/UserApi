@@ -1,0 +1,11 @@
+instrumentation:
+  include-all-sources: true
+  excludes:
+    - migrations/**
+    - app.js
+check:
+  global:
+    Statements: 83
+    Branches: 100
+    Functions: 100
+    Lines: 82

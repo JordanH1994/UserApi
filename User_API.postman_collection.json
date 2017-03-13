@@ -1,0 +1,122 @@
+{
+	"variables": [],
+	"info": {
+		"name": "User API",
+		"_postman_id": "aa43fc62-6760-9353-ad50-07bf571f7136",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "DELETE",
+			"request": {
+				"url": "localhost:3500/users/4",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": "Deletes a user via DELETE taking in the user id to delete, either redirecting to \"localhost:3500/users\" on success, or returns an error"
+			},
+			"response": []
+		},
+		{
+			"name": "GET",
+			"request": {
+				"url": "localhost:3500/users/read/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Gets a user  taking in the user id to find the user, either returning the users data on success, or returns an error"
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL",
+			"request": {
+				"url": "localhost:3500/users/read/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Gets all users, either returning the users data on success, or returns an error"
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE",
+			"request": {
+				"url": "localhost:3500/users/2",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "testemail@test.com",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "forname",
+							"value": "testingForname",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "surname",
+							"value": "testSurname",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": "Updates a user taking in the user id to find the user to update, and taking in the new email, forname, surname via the request body, either returning the users data on success, or returns an error"
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE",
+			"request": {
+				"url": "localhost:3500/users/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "testemail@test.com",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "forname",
+							"value": "testingForname",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "surname",
+							"value": "testSurname",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": "Creates a user via POST, accepts forname, surname, email via the request body, either returning the new user data on success, or an error"
+			},
+			"response": []
+		}
+	]
+}
