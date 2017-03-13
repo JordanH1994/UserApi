@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/JordanH1994/UserApi/badge.svg)](https://coveralls.io/github/JordanH1994/UserApi)
+[![Coverage Status](https://coveralls.io/repos/github/JordanH1994/UserApi/badge.svg?branch=master)](https://coveralls.io/github/JordanH1994/UserApi?branch=master)
 [![CircleCI](https://circleci.com/gh/JordanH1994/UserApi.svg?style=svg)](https://circleci.com/gh/JordanH1994/UserApi)
 
 # Node.js User API
