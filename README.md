@@ -1,7 +1,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/JordanH1994/UserApi/badge.svg?branch=master)](https://coveralls.io/github/JordanH1994/UserApi?branch=master)
 [![CircleCI](https://circleci.com/gh/JordanH1994/UserApi.svg?style=svg)](https://circleci.com/gh/JordanH1994/UserApi)
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/JordanH1994/UserApi/blob/master)
 # Node.js User API
 An API to manage a user persistence layer
 
