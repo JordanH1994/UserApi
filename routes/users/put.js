@@ -8,8 +8,8 @@ module.exports = {
   method: 'PUT',
   path: '/users/{id}',
   config: {
-    description: 'tmp',
-    tags: 'Users',
+    description: 'A route to update a given user',
+    tags: ['api', 'Users'],
     validate: {
       options: {
         allowUnknown: true

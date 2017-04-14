@@ -1,35 +1,18 @@
 'use strict'
 const Q = require('q')
 const usersController = require('../../../controllers/usersController')
-const controller = require('../../../routes/users/get')
-let getAllStub
+const controller = require('../../../routes/users/getOne')
 let getOneStub
 let request = {}
 describe('Routes::Users::Get', () => {
   beforeEach(() => {
-    getAllStub = sandbox.stub(usersController, 'getAll')
     getOneStub = sandbox.stub(usersController, 'get')
   })
   afterEach(() => {
     sandbox.restore()
   })
 
-  context('#Get all', () => {
-    it('should call the get all controller if no id was passed in', () => {
-      request = {
-        params: {
-
-        }
-      }
-      getAllStub.returns(Q.resolve([{ test: 'foo' }]))
-      controller.handler(request, (res) => {
-        expect(getAllStub).to.be.calledOnce()
-        expect(res).to.deep.equal([{ test: 'foo' }])
-      })
-    })
-  })
-
-  context('#Get one', () => {
+  context('#Get', () => {
     it('should return a object representing a user if one was found', () => {
       request = {
         params: {

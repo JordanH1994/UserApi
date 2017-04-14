@@ -6,7 +6,9 @@ const _ = require('lodash')
 const path = require('path')
 const server = new Hapi.Server()
 const __BASE = path.join(path.resolve(), '/')
-
+const pkg = require('./package')
+const Inert = require('inert')
+const Vision = require('vision')
 server.connection({ port: config.port, host: 'localhost' })
 
 const files = recursiveReadSync(__BASE + 'routes')
@@ -20,17 +22,23 @@ _.forEach(files, (file) => {
   }
 })
 
-server.start((err) => {
-  if (err) {
-    throw err
-  }
-  console.log(`Server running at: ${server.info.uri}`)
+server.register([
+  Inert,
+  Vision,
+  {
+    register: require('hapi-swagger'),
+    options: {
+      info: {
+        title: 'Test API Documentation',
+        version: pkg.version
+      }
+    }
+  }], (err) => {
+  if (err) return console.log(err)
+  server.start((err) => {
+    if (err) {
+      throw err
+    }
+    console.log(`Server running at: ${server.info.uri}`)
+  })
 })
-
-// // expose swagger.json
-// app.get('/swagger.json', (req, res) => {
-//   res.setHeader('Content-Type', 'application/json')
-//   res.send(swaggerSpec)
-// })
-
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))

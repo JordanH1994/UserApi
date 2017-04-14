@@ -7,8 +7,8 @@ module.exports = {
   method: 'DELETE',
   path: '/users/{id}',
   config: {
-    description: 'tmp',
-    tags: 'Users',
+    description: 'A route to delete a given user',
+    tags: ['api', 'Users'],
     validate: {
       options: {
         allowUnknown: true

@@ -7,8 +7,8 @@ module.exports = {
   method: 'POST',
   path: '/users',
   config: {
-    description: 'tmp',
-    tags: 'Users',
+    description: 'A route to create a user',
+    tags: ['api', 'Users'],
     validate: {
       options: {
         allowUnknown: true
