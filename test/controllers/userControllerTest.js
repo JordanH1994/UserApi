@@ -95,7 +95,7 @@ describe('User Controller', () => {
     beforeEach(() => {
       userModelStub = sandbox.stub(userModel, 'update')
       const data = {
-        forname: 'newtest',
+        forename: 'newtest',
         surname: 'newtest',
         createdOn: 'newtest',
         email: 'test@test.com'
@@ -116,7 +116,7 @@ describe('User Controller', () => {
       .then((result) => {
         expect(userModelStub).to.have.been.calledOnce()
         expect(userModelStub).to.have.been.calledWith({
-          forname: 'newtest',
+          forename: 'newtest',
           surname: 'newtest',
           createdOn: 'newtest',
           email: 'test@test.com'
@@ -130,9 +130,9 @@ describe('User Controller', () => {
     })
 
     it('should return the updated user', () => {
-      var expectedData = {
+      const expectedData = {
         id: 1,
-        forname: 'newtest',
+        forename: 'newtest',
         surname: 'newtest',
         createdOn: 'newtest',
         email: 'test@test.com'
@@ -142,7 +142,7 @@ describe('User Controller', () => {
       .then((results) => {
         expect(userModelStub).to.have.been.calledOnce()
         expect(userModelStub).to.have.been.calledWith({
-          forname: 'newtest',
+          forename: 'newtest',
           surname: 'newtest',
           createdOn: 'newtest',
           email: 'test@test.com'
@@ -161,7 +161,7 @@ describe('User Controller', () => {
       .fail((error) => {
         expect(userModelStub).to.have.been.calledOnce()
         expect(userModelStub).to.have.been.calledWith({
-          forname: 'newtest',
+          forename: 'newtest',
           surname: 'newtest',
           createdOn: 'newtest',
           email: 'test@test.com'
@@ -237,15 +237,15 @@ describe('User Controller', () => {
 
     it('should return an error if an incorrect emial was passed in', () => {
       req = util.mockRequest({ body: {
-        forname: 'newtest',
+        forename: 'newtest',
         surname: 'newtest',
         createdOn: 'newtest',
         email: 'testtest.com'
       }})
       userModelStub.returns(Q.reject('Error: Validation error: Must be a valid email address'))
 
-      var data = {
-        forname: 'newtest',
+      const data = {
+        forename: 'newtest',
         surname: 'newtest',
         createdOn: 'newtest',
         email: 'testtest.com'
@@ -259,18 +259,18 @@ describe('User Controller', () => {
     })
 
     it('should return the new user if the create was successful', () => {
-      var date = new Date()
+      const date = new Date()
       req = util.mockRequest({ body: {
-        forname: 'newtest',
+        forename: 'newtest',
         surname: 'newtest',
         createdOn: 'newtest',
         email: 'test@test.com',
         date: date
       }})
 
-      var expectedData = {
+      const expectedData = {
         id: 1,
-        forname: 'newtest',
+        forename: 'newtest',
         surname: 'newtest',
         createdOn: date,
         email: 'testEmail'
@@ -281,7 +281,7 @@ describe('User Controller', () => {
       .then((result) => {
         expect(userModelStub).to.have.been.calledOnce()
         expect(userModelStub).to.have.been.calledWith({
-          forname: 'newtest',
+          forename: 'newtest',
           surname: 'newtest',
           createdOn: 'newtest',
           email: 'test@test.com',

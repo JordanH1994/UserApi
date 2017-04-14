@@ -3,6 +3,7 @@
 
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/JordanH1994/UserApi/blob/master)
+
 # Node.js User API
 An API to manage a user persistence layer
 

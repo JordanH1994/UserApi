@@ -1,5 +1,5 @@
 'use strict'
-const {user} = require('../models/')
+const user = require('../models/').user
 const UsersController = {}
 
 UsersController.getAll = () => {
@@ -34,8 +34,8 @@ UsersController.delete = (id) => {
   })
 }
 
-UsersController.create = (user) => {
-  return user.create(user)
+UsersController.create = (data) => {
+  return user.create(data)
 }
 
-exports = module.exports = UsersController
+module.exports = UsersController
