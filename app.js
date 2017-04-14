@@ -27,7 +27,6 @@ server.start((err) => {
   console.log(`Server running at: ${server.info.uri}`)
 })
 
-
 // // expose swagger.json
 // app.get('/swagger.json', (req, res) => {
 //   res.setHeader('Content-Type', 'application/json')
