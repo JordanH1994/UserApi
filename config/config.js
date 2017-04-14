@@ -7,7 +7,7 @@ const config = {
       username: 'api',
       password: 'api',
       database: 'api',
-      host: process.env.DATABASE_URL || 'localhost',
+      host: 'localhost',
       dialect: 'postgres'
     }
   },
@@ -18,7 +18,7 @@ const config = {
       username: 'api',
       password: 'api',
       database: 'api',
-      host: process.env.DATABASE_URL || 'localhost',
+      host: 'localhost',
       dialect: 'postgres'
     }
   },
@@ -29,7 +29,7 @@ const config = {
       username: 'api',
       password: 'api',
       database: 'api',
-      host: process.env.DATABASE_URL || 'localhost',
+      host: 'localhost',
       dialect: 'postgres'
     }
   }
