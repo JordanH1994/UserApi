@@ -1,8 +1,9 @@
 'use strict';
 
-var Boom = require( 'boom' );
-var Joi = require( 'joi' );
-var _ = require( 'lodash' );
+const Boom = require( 'boom' );
+const Joi = require( 'joi' );
+const _ = require( 'lodash' );
+const usersController = require('../../controllers/usersController')
 
 module.exports = {
   method: 'DELETE',
@@ -15,12 +16,14 @@ module.exports = {
         allowUnknown: true
       },
       params: {
-      },
-      query: {
+        id: Joi.number().integer().required()
       }
-    },
+    }
   },
-  handler: function( request, reply ) {
-    reply()
+  handler: function(request, reply) {
+    return usersController.delete(request.params.id)
+    .then((res) => {
+      reply().code(204)
+    })
   }
 }

@@ -1,8 +1,7 @@
-'use strict';
+'use strict'
 
-var Boom = require( 'boom' );
-var Joi = require( 'joi' );
-var _ = require( 'lodash' );
+const Joi = require('joi')
+const usersController = require('../../controllers/usersController')
 
 module.exports = {
   method: 'POST',
@@ -14,13 +13,23 @@ module.exports = {
       options: {
         allowUnknown: true
       },
-      params: {
-      },
-      query: {
+      payload: {
+        forename: Joi.string().required(),
+        surname: Joi.string().required(),
+        email: Joi.string().email().required()
       }
-    },
+    }
   },
-  handler: function( request, reply ) {
-    reply()
+  handler: function (request, reply) {
+    const user = {
+      forename: request.payload.forename,
+      surname: request.payload.surname,
+      email: request.payload.email
+    }
+    console.log(user)
+    return usersController.create(user)
+    .then((res) => {
+      return reply(res).code(201)
+    })
   }
 }
