@@ -1,5 +1,5 @@
 'use strict'
-var config = {
+const config = {
   development: {
     mode: 'development',
     port: 3500,

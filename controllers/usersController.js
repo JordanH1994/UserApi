@@ -1,61 +1,41 @@
 'use strict'
-const {user} = require('../models/')
+const user = require('../models/').user
 const UsersController = {}
 
-UsersController.getAll = (req, res) => {
+UsersController.getAll = () => {
   return user.findAll({
     raw: true
   })
-  .then((users) => {
-    return res.send(users)
-  })
 }
 
-UsersController.get = (req, res) => {
-  const id = req.params.id
+UsersController.get = (id) => {
   return user.find({
     raw: true,
     where: {
       id: id
     }
   })
-  .then((user) => {
-    return res.send(user)
-  })
 }
 
-UsersController.update = (req, res) => {
-  const id = req.params.id
-  const data = req.body
+UsersController.update = (id, data) => {
   return user.update(data, {
     where: {
       id: id
     },
     returning: true
   })
-  .then((user) => {
-    return res.send(user)
-  })
 }
 
-UsersController.delete = (req, res) => {
-  const id = req.params.id
+UsersController.delete = (id) => {
   return user.destroy({
     where: {
       id: id
     }
   })
-  .then((result) => {
-    if (result === 1) return res.send(204)
-    return res.send(new Error('Cannot Delete User with id: ' + req.params.id))
-  })
 }
 
-UsersController.create = (req, res) => {
-  return user.create(req.body)
-  .then((user) => {
-    res.send(user, 201)
-  })
+UsersController.create = (data) => {
+  return user.create(data)
 }
 
 module.exports = UsersController

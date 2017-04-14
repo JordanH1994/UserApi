@@ -62,7 +62,7 @@
 							"enabled": true
 						},
 						{
-							"key": "forname",
+							"key": "forename",
 							"value": "testingForname",
 							"type": "text",
 							"enabled": true
@@ -82,7 +82,7 @@
 		{
 			"name": "CREATE",
 			"request": {
-				"url": "localhost:3500/users/",
+				"url": "localhost:3500/users",
 				"method": "POST",
 				"header": [
 					{
@@ -101,7 +101,7 @@
 							"enabled": true
 						},
 						{
-							"key": "forname",
+							"key": "forename",
 							"value": "testingForname",
 							"type": "text",
 							"enabled": true
@@ -115,6 +115,17 @@
 					]
 				},
 				"description": "Creates a user via POST, accepts forname, surname, email via the request body, either returning the new user data on success, or an error"
+			},
+			"response": []
+		},
+		{
+			"name": "Swagger Docs",
+			"request": {
+				"url": "http://localhost:3500/swagger.json",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
 			},
 			"response": []
 		}
