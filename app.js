@@ -1,65 +1,63 @@
 'use strict'
-const app = require('express')()
-const logger = require('morgan')
-const bodyParser = require('body-parser')
-const users = require('./routes/users')
 const config = require('./config/config')()
-const swaggerJSDoc = require('swagger-jsdoc')
-const swaggerUi = require('swagger-ui-express')
+const Hapi = require('hapi')
+const recursiveReadSync = require('recursive-readdir-sync')
+const _ = require('lodash')
+const path = require('path')
+const server = new Hapi.Server()
+// Figure out where everything is going to be
+const __BASE = path.join(path.resolve(), '/')
 
-const swaggerDefinition = {
-  info: {
-    title: 'Node Users API',
-    version: '1.0.0',
-    description: 'CRUD API using sequalize and express'
-  },
-  host: 'localhost:3500',
-  basePath: '/'
-}
-const options = {
-  // import swaggerDefinitions
-  swaggerDefinition: swaggerDefinition,
-  // path to the API docs
-  apis: ['./routes/*.js']
-}
-// initialize swagger-jsdoc
-const swaggerSpec = swaggerJSDoc(options)
+server.connection({ port: config.port, host: 'localhost' })
 
-app.use(logger('dev'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-
-app.use('/users', users)
-// expose swagger.json
-app.get('/swagger.json', (req, res) => {
-  res.setHeader('Content-Type', 'application/json')
-  res.send(swaggerSpec)
+server.start((err) => {
+  const files = recursiveReadSync(__BASE + 'routes')
+  _.forEach(files, (file) => {
+    try {
+      server.route(require(file))
+    } catch (error) {
+      // if any controllers have an error we want to display it and then kill the node process
+      console.log ('Error Setting up route ' + file, error)
+      process.exit(1)
+    }
+  })
+  if (err) {
+    throw err
+  }
+  console.log(`Server running at: ${server.info.uri}`)
 })
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+// app.use('/users', users)
+// // expose swagger.json
+// app.get('/swagger.json', (req, res) => {
+//   res.setHeader('Content-Type', 'application/json')
+//   res.send(swaggerSpec)
+// })
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-  var err = new Error('Not Found')
-  err.status = 404
-  next(err)
-})
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
-// error handler
-app.use((err, req, res) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message
-  res.locals.error = process.env.NODE_ENV === 'development' ? err : {}
+// // catch 404 and forward to error handler
+// app.use((req, res, next) => {
+//   var err = new Error('Not Found')
+//   err.status = 404
+//   next(err)
+// })
 
-  // render the error page
-  res.status(err.status || 500)
-  res.render('error')
-})
+// // error handler
+// app.use((err, req, res) => {
+//   // set locals, only providing error in development
+//   res.locals.message = err.message
+//   res.locals.error = process.env.NODE_ENV === 'development' ? err : {}
 
-app.listen(config.port, () => {
-  console.log('Any Data passed into this application will be lost on exit')
-  console.log('Express server listening on port ' + config.port)
-})
+//   // render the error page
+//   res.status(err.status || 500)
+//   res.render('error')
+// })
 
-// swagger definition
-module.exports = app
+// app.listen(config.port, () => {
+//   console.log('Any Data passed into this application will be lost on exit')
+//   console.log('Express server listening on port ' + config.port)
+// })
+
+// // swagger definition
+// module.exports = app

@@ -9,24 +9,21 @@
   "scripts": {
     "ci": "istanbul cover _mocha -- -R xunit > $CIRCLE_TEST_REPORTS/unit/results.xml",
     "lint": "standard",
-    "test": "npm run lint && npm run test:coverage",
+    "test": "npm run lint",
     "start": "scripts/start.sh",
     "test:coverage": "NODE_PATH=${PWD} istanbul cover _mocha",
     "test:watch": "NODE_PATH=${PWD} mocha --watch",
     "posttest": "istanbul check-coverage"
   },
   "dependencies": {
-    "body-parser": "~1.15.2",
-    "express": "~4.14.0",
-    "express-test-util": "^1.1.5",
+    "boom": "^4.3.1",
+    "hapi": "^16.1.1",
+    "joi": "^10.4.1",
     "lodash": "^4.17.4",
-    "morgan": "~1.7.0",
     "pg": "^6.1.2",
-    "pg-hstore": "^2.3.2",
     "q": "^1.4.1",
-    "sequelize": "^3.29.0",
-    "swagger-jsdoc": "^1.9.1",
-    "swagger-ui-express": "^1.0.3"
+    "recursive-readdir-sync": "^1.0.6",
+    "sequelize": "^3.29.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
