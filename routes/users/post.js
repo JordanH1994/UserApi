@@ -26,7 +26,7 @@ module.exports = {
       surname: request.payload.surname,
       email: request.payload.email
     }
-    console.log(user)
+
     return usersController.create(user)
     .then((res) => {
       return reply(res).code(201)
