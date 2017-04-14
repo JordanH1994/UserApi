@@ -14,7 +14,8 @@ describe('Routes::Users::Delete', () => {
   afterEach(() => {
     sandbox.restore()
   })
-  context('should call the controller', () => {
+
+  context('#Delete', () => {
     it('should return 1 if the delete was successful with a http code of 204', (done) => {
       request = {
         params: {

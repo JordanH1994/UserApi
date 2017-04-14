@@ -31,7 +31,7 @@ module.exports = {
         if (_.isEmpty(user)) {
           return reply(Boom.notFound(`No user found with Id: ${request.params.id}`))
         }
-        reply({user: user})
+        return reply({user: user})
       })
     }
   }

@@ -24,7 +24,7 @@ module.exports = {
       if (res === 1) {
         return reply().code(204)
       }
-      return reply(Boom.notFound(`No user found with Id: ${request.params.id}`))
+      return reply(Boom.notFound(`Can not delete user with Id: ${request.params.id}`))
     })
   }
 }

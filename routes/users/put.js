@@ -2,6 +2,7 @@
 const {head} = require('lodash')
 const Joi = require('joi')
 const usersController = require('../../controllers/usersController')
+const Boom = require('boom')
 
 module.exports = {
   method: 'PUT',
@@ -31,8 +32,10 @@ module.exports = {
     }
     return usersController.update(request.params.id, user)
     .then((user) => {
-      // check user result for[ 0, [] ]
-      reply(head(user[1])).code(201)
+      if (head(user) === 0) {
+        return reply(Boom.notFound(`Cant not update user with Id: ${request.params.id}, user does not exist`))
+      }
+      return reply().code(204)
     })
   }
 }

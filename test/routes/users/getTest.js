@@ -14,21 +14,23 @@ describe('Routes::Users::Get', () => {
     sandbox.restore()
   })
 
-  it('should call the get all controller if no id was passed in', () => {
-    request = {
-      params: {
+  context('#Get all', () => {
+    it('should call the get all controller if no id was passed in', () => {
+      request = {
+        params: {
 
+        }
       }
-    }
-    getAllStub.returns(Q.resolve([{ test: 'foo' }]))
-    controller.handler(request, (res) => {
-      expect(getAllStub).to.be.calledOnce()
-      expect(res).to.deep.equal([{ test: 'foo' }])
+      getAllStub.returns(Q.resolve([{ test: 'foo' }]))
+      controller.handler(request, (res) => {
+        expect(getAllStub).to.be.calledOnce()
+        expect(res).to.deep.equal([{ test: 'foo' }])
+      })
     })
   })
 
-  context('should call the get controller if an id was passed in', () => {
-    it('and if a user was found it should return an object representing a user', () => {
+  context('#Get one', () => {
+    it('should return a object representing a user if one was found', () => {
       request = {
         params: {
           id: 1
@@ -41,7 +43,7 @@ describe('Routes::Users::Get', () => {
       })
     })
 
-    it('and if a user was not found it should return a 404 error', () => {
+    it('should return a 404 error if a user was not found', () => {
       request = {
         params: {
           id: 1
