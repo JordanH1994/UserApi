@@ -1,19 +1,13 @@
 'use strict'
 const userController = require('../../controllers/usersController')
-const util = require('express-test-util')
 const userModel = require('../../models/').user
 let userModelStub
 const Q = require('q')
-let req
-let res
 
 describe('User Controller', () => {
   describe('# get all', () => {
     beforeEach(() => {
       userModelStub = sandbox.stub(userModel, 'findAll')
-      req = util.mockRequest({ params: { id: 1 } })
-      res = util.mockResponse()
-      sandbox.stub(res, 'send')
     })
 
     afterEach(() => {
@@ -22,7 +16,7 @@ describe('User Controller', () => {
 
     it('should return an error if no users was found', () => {
       userModelStub.returns(Q.resolve([]))
-      userController.getAll(req, res)
+      userController.getAll()
       .fail((err) => {
         expect(userModelStub).to.have.been.calledOnce()
         expect(userModelStub).to.have.been.calledWith({ raw: true })
@@ -32,11 +26,11 @@ describe('User Controller', () => {
 
     it('should return an array of users', () => {
       userModelStub.returns(Q.resolve([{ test: 'foo' }]))
-      return userController.getAll(req, res)
-      .then(() => {
+      return userController.getAll()
+      .then((users) => {
         expect(userModelStub).to.have.been.calledOnce()
         expect(userModelStub).to.have.been.calledWith({ raw: true })
-        expect(res.send).to.be.calledWith([{ test: 'foo' }])
+        expect(users).to.deep.equal([{ test: 'foo' }])
       })
     })
 
@@ -54,9 +48,6 @@ describe('User Controller', () => {
   describe('# get one', () => {
     beforeEach(() => {
       userModelStub = sandbox.stub(userModel, 'find')
-      req = util.mockRequest({ params: { id: 1 } })
-      res = util.mockResponse()
-      sandbox.stub(res, 'send')
     })
 
     afterEach(() => {
@@ -65,20 +56,20 @@ describe('User Controller', () => {
 
     it('should return an empty array if no users was found', () => {
       userModelStub.returns(Q.resolve([]))
-      return userController.get(req, res)
-      .then(() => {
+      return userController.get(1)
+      .then((res) => {
         expect(userModelStub).to.have.been.calledOnce()
         expect(userModelStub).to.have.been.calledWith({ where: {
           id: 1
         },
           raw: true })
-        expect(res.send).to.be.calledWith([])
+        expect(res).to.deep.equal([])
       })
     })
 
     it('should return a single user', () => {
       userModelStub.returns(Q.resolve([{ test: 'foo' }]))
-      return userController.get(req, res)
+      return userController.get(1)
       .then((results) => {
         expect(userModelStub).to.have.been.calledOnce()
         expect(userModelStub).to.have.been.calledWith({
@@ -86,7 +77,7 @@ describe('User Controller', () => {
             id: 1
           },
           raw: true })
-        expect(res.send).to.be.calledWith([{ test: 'foo' }])
+        expect(results).to.deep.equal([{ test: 'foo' }])
       })
     })
   })
@@ -94,15 +85,6 @@ describe('User Controller', () => {
   describe('# update', () => {
     beforeEach(() => {
       userModelStub = sandbox.stub(userModel, 'update')
-      const data = {
-        forename: 'newtest',
-        surname: 'newtest',
-        createdOn: 'newtest',
-        email: 'test@test.com'
-      }
-      req = util.mockRequest({ params: { id: 1 }, body: data })
-      res = util.mockResponse()
-      sandbox.stub(res, 'send')
     })
 
     afterEach(() => {
@@ -111,8 +93,13 @@ describe('User Controller', () => {
 
     it('should return [0] is there was no user found to update', () => {
       userModelStub.returns(Q.resolve([0]))
-
-      return userController.update(req, res)
+      const data = {
+        forename: 'newtest',
+        surname: 'newtest',
+        createdOn: 'newtest',
+        email: 'test@test.com'
+      }
+      return userController.update(1, data)
       .then((result) => {
         expect(userModelStub).to.have.been.calledOnce()
         expect(userModelStub).to.have.been.calledWith({
@@ -125,11 +112,17 @@ describe('User Controller', () => {
             id: 1
           },
           returning: true })
-        expect(res.send).to.be.calledWith([0])
+        expect(result).to.deep.equal([0])
       })
     })
 
     it('should return the updated user', () => {
+      const user = {
+        forename: 'newtest',
+        surname: 'newtest',
+        createdOn: 'newtest',
+        email: 'test@test.com'
+      }
       const expectedData = {
         id: 1,
         forename: 'newtest',
@@ -138,7 +131,7 @@ describe('User Controller', () => {
         email: 'test@test.com'
       }
       userModelStub.returns(Q.resolve([expectedData]))
-      return userController.update(req, res)
+      return userController.update(1, user)
       .then((results) => {
         expect(userModelStub).to.have.been.calledOnce()
         expect(userModelStub).to.have.been.calledWith({
@@ -151,26 +144,7 @@ describe('User Controller', () => {
             id: 1
           },
           returning: true })
-        expect(res.send).to.be.calledWith([expectedData])
-      })
-    })
-
-    it('should return an error if the update fails', () => {
-      userModelStub.returns(Q.reject('something went wrong'))
-      return userController.update(req, res)
-      .fail((error) => {
-        expect(userModelStub).to.have.been.calledOnce()
-        expect(userModelStub).to.have.been.calledWith({
-          forename: 'newtest',
-          surname: 'newtest',
-          createdOn: 'newtest',
-          email: 'test@test.com'
-        }, {
-          where: {
-            id: 1
-          },
-          returning: true })
-        expect(error).to.deep.equal('something went wrong')
+        expect(results).to.deep.equal([expectedData])
       })
     })
   })
@@ -178,48 +152,33 @@ describe('User Controller', () => {
   describe('# delete', () => {
     beforeEach(() => {
       userModelStub = sandbox.stub(userModel, 'destroy')
-      req = util.mockRequest({ params: { id: 1 } })
-      res = util.mockResponse()
-      sandbox.stub(res, 'send')
     })
 
     afterEach(() => {
       sandbox.restore()
     })
 
-    it('should return an empty object if no user was found to remove', () => {
-      userModelStub.returns(Q.resolve({}))
-      return userController.delete(req, res)
+    it('should return 0 if no user was found to remove', () => {
+      userModelStub.returns(Q.resolve(0))
+      return userController.delete(1)
       .then((result) => {
         expect(userModelStub).to.have.been.calledOnce()
         expect(userModelStub).to.have.been.calledWith({ where: {
           id: 1
         } })
-        expect(res.send).to.be.calledWith(new Error('Error: Cannot Delete User with id: 1'))
+        expect(result).to.equal(0)
       })
     })
 
     it('should return 1 if the delete was successful', () => {
       userModelStub.returns(Q.resolve(1))
-      return userController.delete(req, res)
+      return userController.delete(1)
       .then((result) => {
         expect(userModelStub).to.have.been.calledOnce()
         expect(userModelStub).to.have.been.calledWith({ where: {
           id: 1
         } })
-        expect(res.send).to.be.calledWith()
-      })
-    })
-
-    it('shoud return an error if the delete fails', () => {
-      userModelStub.returns(Q.reject('delete failed'))
-      return userController.delete(req, res)
-      .fail((err) => {
-        expect(userModelStub).to.have.been.calledOnce()
-        expect(userModelStub).to.have.been.calledWith({ where: {
-          id: 1
-        } })
-        expect(err).to.deep.equal('delete failed')
+        expect(result).to.equal(1)
       })
     })
   })
@@ -227,8 +186,6 @@ describe('User Controller', () => {
   describe('# create', () => {
     beforeEach(() => {
       userModelStub = sandbox.stub(userModel, 'create')
-      res = util.mockResponse()
-      sandbox.stub(res, 'send')
     })
 
     afterEach(() => {
@@ -236,21 +193,14 @@ describe('User Controller', () => {
     })
 
     it('should return an error if an incorrect emial was passed in', () => {
-      req = util.mockRequest({ body: {
-        forename: 'newtest',
-        surname: 'newtest',
-        createdOn: 'newtest',
-        email: 'testtest.com'
-      }})
       userModelStub.returns(Q.reject('Error: Validation error: Must be a valid email address'))
-
       const data = {
         forename: 'newtest',
         surname: 'newtest',
-        createdOn: 'newtest',
         email: 'testtest.com'
       }
-      return userController.create(req, res)
+
+      return userController.create(data)
       .fail((result) => {
         expect(userModelStub).to.have.been.calledOnce()
         expect(userModelStub).to.have.been.calledWith(data)
@@ -259,35 +209,28 @@ describe('User Controller', () => {
     })
 
     it('should return the new user if the create was successful', () => {
-      const date = new Date()
-      req = util.mockRequest({ body: {
-        forename: 'newtest',
-        surname: 'newtest',
-        createdOn: 'newtest',
-        email: 'test@test.com',
-        date: date
-      }})
-
       const expectedData = {
         id: 1,
         forename: 'newtest',
         surname: 'newtest',
-        createdOn: date,
         email: 'testEmail'
+      }
+      const data = {
+        forename: 'newtest',
+        surname: 'newtest',
+        email: 'test@test.com'
       }
 
       userModelStub.returns(Q.resolve(expectedData))
-      return userController.create(req, res)
+      return userController.create(data)
       .then((result) => {
         expect(userModelStub).to.have.been.calledOnce()
         expect(userModelStub).to.have.been.calledWith({
           forename: 'newtest',
           surname: 'newtest',
-          createdOn: 'newtest',
-          email: 'test@test.com',
-          date: date
+          email: 'test@test.com'
         })
-        expect(res.send).to.be.calledWith(expectedData)
+        expect(result).to.deep.equal(expectedData)
       })
     })
   })

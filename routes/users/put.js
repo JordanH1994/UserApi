@@ -31,7 +31,7 @@ module.exports = {
     }
     return usersController.update(request.params.id, user)
     .then((user) => {
-      //check user result for[ 0, [] ]
+      // check user result for[ 0, [] ]
       reply(head(user[1])).code(201)
     })
   }

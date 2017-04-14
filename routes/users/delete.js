@@ -1,10 +1,8 @@
-'use strict';
+'use strict'
 
-const Boom = require( 'boom' );
-const Joi = require( 'joi' );
-const _ = require( 'lodash' );
+const Joi = require('joi')
 const usersController = require('../../controllers/usersController')
-
+const Boom = require('boom')
 module.exports = {
   method: 'DELETE',
   path: '/users/{id}',
@@ -20,10 +18,13 @@ module.exports = {
       }
     }
   },
-  handler: function(request, reply) {
+  handler: function (request, reply) {
     return usersController.delete(request.params.id)
     .then((res) => {
-      reply().code(204)
+      if (res === 1) {
+        return reply().code(204)
+      }
+      return reply(Boom.notFound(`No user found with Id: ${request.params.id}`))
     })
   }
 }

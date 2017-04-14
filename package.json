@@ -9,7 +9,7 @@
   "scripts": {
     "ci": "istanbul cover _mocha -- -R xunit > $CIRCLE_TEST_REPORTS/unit/results.xml",
     "lint": "standard",
-    "test": "npm run lint",
+    "test": "npm run lint && npm run test:coverage",
     "start": "scripts/start.sh",
     "test:coverage": "NODE_PATH=${PWD} istanbul cover _mocha",
     "test:watch": "NODE_PATH=${PWD} mocha --watch",
