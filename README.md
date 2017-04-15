@@ -28,8 +28,8 @@ On startup the app will create a users table and insert some users read from `sc
 
 ## Tests
 
-Unit tests are run with [Mocha](https://mochajs.org/) which can run with `npm run test:coverage`.
-Linting is run using [StandardJs](http://standardjs.com/) which can be run with `npm run lint`.
+* Unit tests are run with [Mocha](https://mochajs.org/) which can run with `npm run test:coverage`.
+* Linting is run using [StandardJs](http://standardjs.com/) which can be run with `npm run lint`.
 
 ## Documentation
 Once the server is running, the api is documented using swagger, which can be accessed by going to http://localhost:3500/documentation
