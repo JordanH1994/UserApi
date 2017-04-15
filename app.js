@@ -9,7 +9,7 @@ const __BASE = path.join(path.resolve(), '/')
 const pkg = require('./package')
 const Inert = require('inert')
 const Vision = require('vision')
-server.connection({ port: config.port })
+server.connection({ port: process.env.PORT || config.port })
 
 const files = recursiveReadSync(__BASE + 'routes')
 _.forEach(files, (file) => {
