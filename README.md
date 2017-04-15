@@ -27,7 +27,8 @@ An API to manage a user persistence layer
 On startup the app will create a users table and insert some users read from `scripts/baseData.json` to use for storing, reading, writing, and deleting 'user' information
 
 ## Tests
-Unit tests can run using `npm test`.
+
+Unit tests are run with [Mocha](https://mochajs.org/) which can run with `npm run test:coverage`.
 Linting is run using [StandardJs](http://standardjs.com/) which can be run with `npm run lint`.
 
 ## Documentation
