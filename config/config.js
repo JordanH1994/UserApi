@@ -6,11 +6,11 @@ const config = {
   },
   staging: {
     mode: 'staging',
-    port: 4000
+    port: 80
   },
   production: {
     mode: 'production',
-    port: 5000
+    port: 80
   }
 }
 module.exports = (mode) => {
