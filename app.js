@@ -37,7 +37,7 @@ server.register([
   if (err) return console.log(err)
   server.start((err) => {
     if (err) {
-      throw err
+      console.error(err)
     }
     console.log(`Server running at: ${server.info.uri}`)
   })
