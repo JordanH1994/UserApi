@@ -50,5 +50,9 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   })
 
+  User.sync()
+  .then(() => {
+    User.bulkCreate(require('../scripts/baseData.json'))
+  })
   return User
 }
