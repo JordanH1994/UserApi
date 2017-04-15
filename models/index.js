@@ -3,17 +3,16 @@
 const fs = require('fs')
 const path = require('path')
 const Sequelize = require('sequelize')
-const env = process.env.NODE_ENV || 'development'
-const dbUrl = process.env.DATABASE_URL
-const config = require('../config/config')(env)
+const env = process.env.NODE_ENV
 const db = {}
-let sequelize
+// const sequelize = new Sequelize(config.database.database, config.database.username, config.database.password, config.database)
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  logging: false,
+  dialectOptions: {
+    ssl: (env !== 'development')  /* for SSL config since Heroku gives you this out of the box */
+  }
+})
 
-if (env !== 'development') {
-  sequelize = new Sequelize(dbUrl, config.database)
-} else {
-  sequelize = new Sequelize(config.database.database, config.database.username, config.database.password, config.database)
-}
 fs.readdirSync(__dirname)
   .filter((file) => {
     return (file.indexOf('.') !== 0) && (file !== 'index.js')

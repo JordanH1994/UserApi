@@ -6,4 +6,5 @@ psql -tAc "SELECT 1 FROM pg_database WHERE datname='api'" | grep -q 1 || psql -c
 #dump the sql file into the database 
 psql -q -U api -d api -1 -f ./scripts/.setupDatabase.sql &&
 
-NODE_ENV=development nodemon app.js
+NODE_ENV=development DATABASE_URL=postgres://api:api@localhost:5432/api nodemon app.js
+

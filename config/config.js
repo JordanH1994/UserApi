@@ -2,36 +2,15 @@
 const config = {
   development: {
     mode: 'development',
-    port: 3500,
-    database: {
-      username: 'api',
-      password: 'api',
-      database: 'api',
-      host: 'localhost',
-      dialect: 'postgres'
-    }
+    port: 3500
   },
   staging: {
     mode: 'staging',
-    port: 4000,
-    database: {
-      username: 'api',
-      password: 'api',
-      database: 'api',
-      host: 'localhost',
-      dialect: 'postgres'
-    }
+    port: 80
   },
   production: {
     mode: 'production',
-    port: 5000,
-    database: {
-      username: 'api',
-      password: 'api',
-      database: 'api',
-      host: 'localhost',
-      dialect: 'postgres'
-    }
+    port: 80
   }
 }
 module.exports = (mode) => {

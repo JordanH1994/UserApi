@@ -31,4 +31,4 @@ Unit tests can run using `npm test`.
 Linting is run using [StandardJs](http://standardjs.com/) which can be run with `npm run lint`.
 
 ## Documentation
-Once the server is running, the api is documented using swagger, which can be accessed by going to `http://localhost:3500/documentation
+Once the server is running, the api is documented using swagger, which can be accessed by going to http://localhost:3500/documentation
