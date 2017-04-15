@@ -24,7 +24,7 @@ An API to manage a user persistence layer
 
 ## Usage
 1. To start the Node.js server run `npm start`
-On startup the app will create a users table and insert some users read from `scripts/.setupDatabase.sql` to use for storing, reading, writing, and deleting 'user' information
+On startup the app will create a users table and insert some users read from `scripts/baseData.json` to use for storing, reading, writing, and deleting 'user' information
 
 ## Tests
 Unit tests can run using `npm test`.
