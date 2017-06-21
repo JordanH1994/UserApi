@@ -7,4 +7,4 @@ jobs:
     steps:
       - checkout
       - run: echo "hello world"
-      - run: cat ~/UsersApi/package.json
+      - run: cat ~/UserApi/package.json
