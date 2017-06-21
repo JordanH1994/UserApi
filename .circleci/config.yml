@@ -6,6 +6,5 @@
        - image: circleci/node:6.10.3
     steps:
       - checkout
-      - build:
-          name: install-npm-wee
-          command: npm install
+      - run:
+          - run: cat ~/UserApi/package.json
