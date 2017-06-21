@@ -2,7 +2,7 @@
  jobs:
    build:
      working_directory: ~/UserApi
-     docker:
+     machine:
        - image: circleci/node:6.9.4
      steps:
        - checkout
