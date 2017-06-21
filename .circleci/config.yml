@@ -10,6 +10,9 @@ jobs:
           name: install-npm-wee
           command: npm install
       - run:
+        name: make test dir
+        command: mkdir -p $CIRCLE_TEST_REPORTS/unit && mkdir -p $CIRCLE_TEST_REPORTS/coverage
+      - run:
           name: lint
           command: npm run lint
       - run:
