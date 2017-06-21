@@ -11,7 +11,7 @@ jobs:
           command: npm install
       - run:
           name: make test dir
-          command: mkdir -p $CIRCLE_TEST_REPORTS/unit && mkdir -p $CIRCLE_TEST_REPORTS/coverage
+          command: mkdir -p ~/unit && mkdir -p ~/coverage
       - run:
           name: lint
           command: npm run lint
