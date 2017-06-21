@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/UserApi
+    machine:
+      - image: circleci/node:6.9.4
+    steps:
+      - checkout
+    - run:
+        name: install-npm-wee
+        command: npm install
+    - run:
+        name: lint
+        command: npm run lint
+    - run:
+        name: ci
+        command: npm run ci
+    - run:
+        name: code-coverage
+        command: NODE_ENV=test istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+    - store_artifacts:
+        path: test-results.xml
+        prefix: tests
+    - store_artifacts:
+        path: coverage
+        prefix: coverage
+    - store_test_results:
+        path: test-results.xml
