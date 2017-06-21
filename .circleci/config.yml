@@ -1,9 +1,9 @@
- version: 2
- jobs:
-   build:
-     working_directory: ~/UserApi
-     docker:
-       - image: circleci/node:6.10.3
+version: 2
+jobs:
+  build:
+    working_directory: ~/UserApi
+    docker:
+      - image: circleci/node:6.10.3
     steps:
       - checkout
       - run: echo "hello world"
