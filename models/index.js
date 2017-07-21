@@ -5,7 +5,6 @@ const path = require('path')
 const Sequelize = require('sequelize')
 const env = process.env.NODE_ENV
 const db = {}
-// const sequelize = new Sequelize(config.database.database, config.database.username, config.database.password, config.database)
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   logging: false,
   dialectOptions: {
