@@ -31,7 +31,8 @@ server.register([
       info: {
         title: 'Test API Documentation',
         version: pkg.version
-      }
+      },
+      documentationPath: '/'
     }
   }], (err) => {
   if (err) return console.log(err)
