@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  checkout_code:
+  build:
     working_directory: ~/UserApi
     docker:
       - image: circleci/node:6.10.3
@@ -44,13 +44,13 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - checkout_code
+      - build
       - lint: 
         requires:
-            - checkout_code
+            - build
       - ci:
         requires:
-            - checkout_code
+            - build
       - coveralls:
         requires:
-            - checkout_code
+            - build
