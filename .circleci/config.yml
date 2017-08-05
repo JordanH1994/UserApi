@@ -34,4 +34,4 @@ workflows:
       - build
       - install:
         requires:
-          - checkout_code
+          - build
