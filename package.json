@@ -1,17 +1,18 @@
 {
   "name": "user_api",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "engines": {
     "node": "6.9.4"
   },
   "description": "Users API build with express and Sequalize",
   "private": true,
   "scripts": {
-    "ci": "istanbul cover _mocha -- -R xunit > $CIRCLE_TEST_REPORTS/unit/results.xml",
+    "ci": "istanbul cover _mocha -- -R xunit > ~/unit/results.xml",
     "lint": "standard",
     "test": "npm run lint && npm run test:coverage",
     "start": "scripts/start.sh",
     "test:coverage": "NODE_PATH=${PWD} istanbul cover _mocha",
+    "test:coveralls": "NODE_ENV=test istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "test:watch": "NODE_PATH=${PWD} mocha --watch",
     "posttest": "istanbul check-coverage"
   },

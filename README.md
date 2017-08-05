@@ -1,5 +1,5 @@
 [![Coverage Status](https://coveralls.io/repos/github/JordanHood/UserApi/badge.svg?branch=master)](https://coveralls.io/github/JordanHood/UserApi?branch=master)
-[![CircleCI](https://circleci.com/gh/JordanHood/UserApi/tree/master.svg?style=svg)](https://circleci.com/gh/JordanHood/UserApi/tree/master)
+[![CircleCI](https://circleci.com/gh/JordanHood/UserApi.svg?style=svg)](https://circleci.com/gh/JordanHood/UserApi)
 
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/JordanHood/UserApi/blob/master)
@@ -32,4 +32,4 @@ On startup the app will create a users table and insert some users read from `sc
 * Linting is run using [StandardJs](http://standardjs.com/) which can be run with `npm run lint`.
 
 ## Documentation
-Once the server is running, the api is documented using swagger, which can be accessed by going to http://localhost:3500/
+Once the server is running, the api is documented using swagger, which can be accessed by going to `http://localhost:3500/`
