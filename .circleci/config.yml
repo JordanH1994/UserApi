@@ -31,6 +31,20 @@ jobs:
             key: v1-bundle-{{ checksum ".circle-sha" }}
             paths:
               - ~/UserApi
+  lint: 
+    working_directory: ~/UserApi
+    docker:
+      - image: circleci/node:6.10.3
+    steps:
+      - checkout
+      - run: 
+          name: save SHA to a file
+          command: echo $CIRCLE_SHA1 > .circle-sha
+      - restore_cache:
+          key: v1-repo-{{ checksum ".circle-sha" }}
+      - run:
+          name: Linting
+          command: npm run lint
 workflows:
     version: 2
     build_accept_deploy:
@@ -39,3 +53,7 @@ workflows:
             - install:
                 requires:
                     - build
+            - lint:
+                requires:
+                    - build
+                    - install
