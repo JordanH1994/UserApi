@@ -12,7 +12,7 @@ describe('Configuration setup', () => {
     done()
   })
   it('should load production configurations', (done) => {
-    const config = require('../../config/config')()
+    const config = require('../../config/config')('production')
     expect(config.mode).to.equal('production')
     done()
   })
