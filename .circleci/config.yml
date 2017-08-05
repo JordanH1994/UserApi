@@ -32,6 +32,3 @@ workflows:
   build_accept_deploy:
     jobs:
       - build
-      - install:
-        requires:
-          - build
