@@ -60,7 +60,7 @@ jobs:
           key: v1-node-modules-{{ checksum ".circle-sha" }}
       - run: 
           name: Create coverage directory
-          command: mkdir -p ~/coverage
+          command: mkdir -p ~/unit
       - run:
           name: Unit Tests
           command: npm run ci
