@@ -46,6 +46,39 @@ jobs:
       - run:
           name: Linting
           command: npm run lint
+  test:
+    working_directory: ~/UserApi
+    docker:
+      - image: circleci/node:6.10.3
+    steps:
+      - run: 
+          name: save SHA to a file
+          command: echo $CIRCLE_SHA1 > .circle-sha
+      - restore_cache:
+          key: v1-repo-{{ checksum ".circle-sha" }}
+      - restore_cache:
+          key: v1-node-modules-{{ checksum ".circle-sha" }}
+      - run: 
+          name: Create coverage directory
+          command: mkdir -p ~/coverage
+      - run:
+          name: Unit Tests
+          command: npm run ci
+  coveralls: 
+    working_directory: ~/UserApi
+    docker:
+      - image: circleci/node:6.10.3
+    steps:
+      - run: 
+          name: save SHA to a file
+          command: echo $CIRCLE_SHA1 > .circle-sha
+      - restore_cache:
+          key: v1-repo-{{ checksum ".circle-sha" }}
+      - restore_cache:
+          key: v1-node-modules-{{ checksum ".circle-sha" }}
+      - run:
+          name: Unit Tests
+          command: npm run test:coveralls
 workflows:
     version: 2
     build_accept_deploy:
@@ -55,6 +88,14 @@ workflows:
                 requires:
                     - build
             - lint:
+                requires:
+                    - build
+                    - install
+            - test:
+                requires:
+                    - build
+                    - install
+            - coveralls:
                 requires:
                     - build
                     - install

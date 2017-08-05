@@ -12,6 +12,7 @@
     "test": "npm run lint && npm run test:coverage",
     "start": "scripts/start.sh",
     "test:coverage": "NODE_PATH=${PWD} istanbul cover _mocha",
+    "test:coveralls": "NODE_ENV=test istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "test:watch": "NODE_PATH=${PWD} mocha --watch",
     "posttest": "istanbul check-coverage"
   },
