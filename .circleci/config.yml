@@ -7,8 +7,8 @@ jobs:
     steps:
       - checkout
       - run: 
-        name: save SHA to a file
-        command: echo $CIRCLE_SHA1 > .circle-sha
+          name: save SHA to a file
+          command: echo $CIRCLE_SHA1 > .circle-sha
       - save_cache:
           key: v1-repo-{{ checksum ".circle-sha" }}
           paths:
@@ -16,24 +16,24 @@ jobs:
   install: 
     working_directory: ~/UserApi
     docker:
-      - image: circleci/node:6.10.3
+        - image: circleci/node:6.10.3
     steps:
-      - run:
-        name: save SHA to a file
-        command: echo $CIRCLE_SHA1 > .circle-sha
-      - restore_cache:
-         keys:
-           - v1-repo-{{ checksum ".circle-sha" }}
-      - run: 
-          name: install depencancies
-          command: npm install
-      - save_cache:
-          key: v1-bundle-{{ checksum ".circle-sha" }}
-          paths:
-            - ~/UserApi
+        - run:
+            name: save SHA to a file
+            command: echo $CIRCLE_SHA1 > .circle-sha
+        - restore_cache:
+            keys:
+              - v1-repo-{{ checksum ".circle-sha" }}
+        - run: 
+            name: install depencancies
+            command: npm install
+        - save_cache:
+            key: v1-bundle-{{ checksum ".circle-sha" }}
+            paths:
+              - ~/UserApi
 workflows:
-  version: 2
-  build_accept_deploy:
-    jobs:
-      - build
-      - install
+    version: 2
+    build_accept_deploy:
+        jobs:
+            - build
+            - install
