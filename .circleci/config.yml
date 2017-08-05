@@ -1,41 +1,64 @@
 version: 2
 jobs:
-  build:
+  checkout_code:
     working_directory: ~/UserApi
     docker:
       - image: circleci/node:6.10.3
     steps:
       - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run: npm install
+      - run:
+        name: save SHA to a file
+          command: echo $CIRCLE_SHA1 > .circle-sha
+      - save_cache:
+          key: v1-repo-{{ checksum ".circle-sha" }}
+          paths:
+            - ~/UserApi/node_modules
   lint:
-    requires:
-        - build
+    working_directory: ~/UserApi
     docker:
       - image: circleci/node:6.10.3
     steps:
+      - run:
+        name: save SHA to a file
+        command: echo $CIRCLE_SHA1 > .circle-sha
+      - restore_cache:
+        keys:
+          - v1-repo-{{ checksum ".circle-sha" }}
       - run: npm run lint
   ci:
-    requires:
-        - build
     docker:
       - image: circleci/node:6.10.3
     steps:
+       - run:
+        name: save SHA to a file
+        command: echo $CIRCLE_SHA1 > .circle-sha
+      - restore_cache:
+        keys:
+          - v1-repo-{{ checksum ".circle-sha" }}
       - run: mkdir -p ~/unit && mkdir -p ~/coverage
       - run: npm run ci
   coveralls:
-    requires:
-        - build
     docker:
       - image: circleci/node:6.10.3
     steps:
+       - run:
+        name: save SHA to a file
+        command: echo $CIRCLE_SHA1 > .circle-sha
+      - restore_cache:
+        keys:
+          - v1-repo-{{ checksum ".circle-sha" }}
       - run: 'NODE_ENV=test ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage'
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
-      - lint
-      - ci
-      - coveralls
+      - checkout_code
+      - lint: 
+        requires:
+            - checkout_code
+      - ci:
+        requires:
+            - checkout_code
+      - coveralls:
+        requires:
+            - checkout_code
