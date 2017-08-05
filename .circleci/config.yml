@@ -49,10 +49,10 @@ workflows:
       - build
       - lint: 
         requires:
-            - build
+          - build
       - ci:
         requires:
-            - build
+          - build
       - coveralls:
         requires:
-            - build
+          - build
