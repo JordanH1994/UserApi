@@ -8,17 +8,13 @@ jobs:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
-    run:
-        name: install-npm-wee
-        command: npm install
+      - run: npm install
   lint:
     requires:
         - build
     docker:
       - image: circleci/node:6.10.3
     steps:
-      - checkout
-      - run: npm install
       - run: npm run lint
   ci:
     requires:
@@ -26,8 +22,6 @@ jobs:
     docker:
       - image: circleci/node:6.10.3
     steps:
-      - checkout
-      - run: npm install
       - run: mkdir -p ~/unit && mkdir -p ~/coverage
       - run: npm run ci
   coveralls:
@@ -36,8 +30,6 @@ jobs:
     docker:
       - image: circleci/node:6.10.3
     steps:
-      - checkout
-      - run: npm install
       - run: 'NODE_ENV=test ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage'
 workflows:
   version: 2
