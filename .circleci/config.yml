@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  - build:
+  build:
     working_directory: ~/UserApi
     docker:
       - image: circleci/node:6.10.3
@@ -11,7 +11,7 @@ jobs:
           key: v1-repo-{{ checksum ".circle-sha" }}
           paths:
             - ~/UserApi
-  - install: 
+  install: 
     working_directory: ~/UserApi
     docker:
       - image: circleci/node:6.10.3
@@ -32,6 +32,6 @@ workflows:
   build_accept_deploy:
     jobs:
       - build
-      - install
+      - install:
         requires:
           - checkout_code
