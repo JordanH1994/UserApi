@@ -6,6 +6,11 @@ jobs:
       - image: circleci/node:6.10.3
     steps:
       - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+    - run:
+        name: install-npm-wee
+        command: npm install
   test1:
     docker:
       - image: circleci/node:6.10.3
