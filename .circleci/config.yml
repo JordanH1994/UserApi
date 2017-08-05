@@ -22,16 +22,18 @@ jobs:
           - v1-repo-{{ checksum ".circle-sha" }}
       - run: npm run lint
   ci:
+    working_directory: ~/UserApi
     docker:
       - image: circleci/node:6.10.3
     steps:
-       - run: echo $CIRCLE_SHA1 > .circle-sha
+      - run: echo $CIRCLE_SHA1 > .circle-sha
       - restore_cache:
         keys:
           - v1-repo-{{ checksum ".circle-sha" }}
       - run: mkdir -p ~/unit && mkdir -p ~/coverage
       - run: npm run ci
   coveralls:
+    working_directory: ~/UserApi
     docker:
       - image: circleci/node:6.10.3
     steps:
