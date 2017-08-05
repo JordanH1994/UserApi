@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  - build:
     working_directory: ~/UserApi
     docker:
       - image: circleci/node:6.10.3
@@ -11,7 +11,7 @@ jobs:
           key: v1-repo-{{ checksum ".circle-sha" }}
           paths:
             - ~/UserApi
-  install: 
+  - install: 
     working_directory: ~/UserApi
     docker:
       - image: circleci/node:6.10.3
@@ -24,9 +24,9 @@ jobs:
            - v1-repo-{{ checksum ".circle-sha" }}
       - run: npm install
       - save_cache:
-          key: v1-bundle-{{ checksum "Gemfile.lock" }}
+          key: v1-bundle-{{ checksum ".circle-sha" }}
           paths:
-            - ~/circleci-demo-workflows/vendor/bundle
+            - ~/UserApi
 workflows:
   version: 2
   build_accept_deploy:
