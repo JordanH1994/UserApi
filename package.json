@@ -24,7 +24,7 @@
     "joi": "10.6.0",
     "lodash": "4.17.4",
     "pg": "7.12.1",
-    "q": "1.5.0",
+    "q": "1.5.1",
     "recursive-readdir-sync": "1.0.6",
     "sequelize": "4.4.2",
     "vision": "4.1.1"
